@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>PayloadContent</key>
+        <array>
+            <dict>
+                <key>EmailAccountDescription</key>
+                <string>{{ .DisplayName }}</string>
+                <key>EmailAccountName</key>
+                <string>{{ .DisplayName }}</string>
+                <key>EmailAccountType</key>
+                <string>EmailTypeIMAP</string>
+                <key>EmailAddress</key>
+                <string>{{ .Address }}</string>
+                <key>IncomingMailServerAuthentication</key>
+                <string>EmailAuthPassword</string>
+                <key>IncomingMailServerHostName</key>
+                <string>{{ .Env.ImapServer }}</string>
+                <key>IncomingMailServerPortNumber</key>
+                <integer>{{ .Env.ImapPort }}</integer>
+                <key>IncomingMailServerUseSSL</key>
+                <{{ if .Env.ImapSsl }}true{{ else }}false{{ end }}/>
+                <key>IncomingMailServerUsername</key>
+                <string>{{ .Username }}</string>
+                <key>OutgoingMailServerAuthentication</key>
+                <string>EmailAuthPassword</string>
+                <key>OutgoingMailServerHostName</key>
+                <string>{{ .Env.SmtpServer }}</string>
+                <key>OutgoingMailServerPortNumber</key>
+                <integer>{{ .Env.SmtpPort }}</integer>
+                <key>OutgoingMailServerUseSSL</key>
+                <{{ if .Env.SmtpSsl }}true{{ else }}false{{ end }}/>
+                <key>OutgoingMailServerUsername</key>
+                <string>{{ .Username }}</string>
+                <key>OutgoingPasswordSameAsIncomingPassword</key>
+                <true/>
+                <key>PayloadDescription</key>
+                <string>Email account configuration for {{ .Address }}</string>
+                <key>PayloadDisplayName</key>
+                <string>{{ .DisplayName }}</string>
+                <key>PayloadIdentifier</key>
+                <string>{{ .Env.EmailProvider }}.autoconfig.{{ .Uuid }}</string>
+                <key>PayloadType</key>
+                <string>com.apple.mail.managed</string>
+                <key>PayloadUUID</key>
+                <string>{{ .Uuid }}</string>
+                <key>PayloadVersion</key>
+                <real>1</real>
+                <key>SMIMEEnablePerMessageSwitch</key>
+                <false/>
+                <key>SMIMEEnabled</key>
+                <false/>
+                <key>SMIMESigningEnabled</key>
+                <false/>
+                <key>disableMailRecentsSyncing</key>
+                <false/>
+            </dict>
+        </array>
+        <key>PayloadDescription</key>
+        <string>Email account configuration for {{ .Address }}</string>
+        <key>PayloadDisplayName</key>
+        <string>{{ .DisplayName }}</string>
+        <key>PayloadIdentifier</key>
+        <string>{{ .EmailProvider }}.autoconfig.{{ .Uuid }}</string>
+        <key>PayloadOrganization</key>
+        <string>{{ .EmailProvider }}</string>
+        <key>PayloadRemovalDisallowed</key>
+        <false/>
+        <key>PayloadType</key>
+        <string>Configuration</string>
+        <key>PayloadUUID</key>
+        <string>{{ .Uuid }}</string>
+        <key>PayloadVersion</key>
+        <integer>1</integer>
+    </dict>
+</plist>

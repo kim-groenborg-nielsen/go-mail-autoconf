@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clientConfig version="1.1">
+    <emailProvider id="{{ .Env.EmailProvider }}">
+        <domain>{{ .Domain }}</domain>
+        <displayName>{{ .DisplayName }}</displayName>
+        <incomingServer type="imap">
+            <hostname>{{ .Env.ImapServer }}</hostname>
+            <port>{{ .Env.ImapPort }}</port>
+            <socketType>{{if .Env.ImapSsl }}SSL{{ else }}STARTTLS{{ end }}</socketType>
+            <authentication>password-cleartext</authentication>
+            <username>{{ .Username }}</username>
+        </incomingServer>
+        {{ if .Env.Pop3Server }}<incomingServer type="pop3">
+            <hostname>{{ .Env.Pop3Server }}</hostname>
+            <port>{{ .Env.Pop3Port }}</port>
+            <socketType>{{if .Env.Pop3Ssl }}SSL{{ else }}STARTTLS{{ end }}</socketType>
+            <authentication>password-cleartext</authentication>
+            <username>{{ .Username }}</username>
+        </incomingServer>{{ end }}
+        <outgoingServer type="smtp">
+            <hostname>{{ .Env.SmtpServer }}</hostname>
+            <port>{{ .Env.SmtpPort }}</port>
+            <socketType>{{if .Env.SmtpSsl }}SSL{{ else }}STARTTLS{{ end }}</socketType>
+            <username>{{ .Username }}</username>
+            <authentication>password-cleartext</authentication>
+            <useGlobalPreferredServer>{{ if .Env.SmtpGlobalPreferred }}yes{{ else }}no{{ end }}</useGlobalPreferredServer>
+        </outgoingServer>
+    </emailProvider>
+</clientConfig>

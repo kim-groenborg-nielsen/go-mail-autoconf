@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Autodiscover xmlns="http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006">
+    <Response xmlns="http://schemas.microsoft.com/exchange/autodiscover/outlook/responseschema/2006a">
+        <User>
+            <DisplayName>{{ .DisplayName }}</DisplayName>
+        </User>
+        <Account>
+            <AccountType>email</AccountType>
+            <Action>settings</Action>
+            <Protocol>
+                <Type>IMAP</Type>
+                <Server>{{ .Env.ImapServer }}</Server>
+                <Port>{{ .Env.ImapPort }}</Port>
+                <SPA>off</SPA>
+                <Encryption>Auto</Encryption>
+                <SSL>on</SSL>
+                <AuthRequired>on</AuthRequired>
+                <DomainRequired>off</DomainRequired>
+                <LoginName>{{ .Username }}</LoginName>
+            </Protocol>
+            {{ if .Env.Pop3Server }}<Protocol>
+                <Type>POP3</Type>
+                <Server>{{ .Env.Pop3Server }}</Server>
+                <Port>{{ .Env.Pop3Port }}</Port>
+                <SPA>off</SPA>
+                <Encryption>Auto</Encryption>
+                <SSL>on</SSL>
+                <AuthRequired>on</AuthRequired>
+                <DomainRequired>off</DomainRequired>
+                <LoginName>{{ .Username }}</LoginName>
+            </Protocol>{{ end }}
+            <Protocol>
+                <Type>SMTP</Type>
+                <Server>{{ .Env.SmtpServer }}</Server>
+                <Port>{{ .Env.SmtpPort }}</Port>
+                <SPA>off</SPA>
+                <Encryption>Auto</Encryption>
+                <SSL>on</SSL>
+                <AuthRequired>on</AuthRequired>
+                <UsePOPAuth>on</UsePOPAuth>
+                <SMTPLast>off</SMTPLast>
+                <DomainRequired>off</DomainRequired>
+                <LoginName>{{ .Username }}</LoginName>
+            </Protocol>
+        </Account>
+    </Response>
+</Autodiscover>

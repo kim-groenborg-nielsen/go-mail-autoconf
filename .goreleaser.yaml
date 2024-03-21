@@ -1,0 +1,14 @@
+# .goreleaser.yaml
+
+archives:
+  - format_overrides:
+    - goos: windows
+      format: zip
+
+builds:
+  - id: go-mail-autoconf
+    env:
+      - CGO_ENABLED=0
+    binary: go-mail-autoconf
+    ldflags:
+        - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
